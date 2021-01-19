@@ -59,11 +59,13 @@ There is an additional level of averaging possible. In homo-oligomeric proteins,
 
 ### Restraining forces
 
-At every step of the simulation, after calculating the value of the restraining potential, *V_{ssNMR}*, a resulting force (***F_{ssNMR}***) is applied to maximize the agreement with experimental data:
+At every step of the simulation, after calculating the value of the restraining potential, *V<sub>ssNMR</sub>*, a resulting force (***F<sub>ssNMR</sub>***) is applied to maximize the agreement with experimental data:
 
 ![equation5](https://latex.codecogs.com/svg.latex?\vec{F}_{ssNMR}=-\frac{dV_{ssNMR}}{d\vec{r}})
 
-applying the chain rule, we can further separate the two contributions to the force:
+where ***r*** are the atomic coordinates of each atom involved in the restraint.
+
+Applying the chain rule, we can further separate the two contributions to the force:
 
 ![equation6](http://latex.codecogs.com/svg.latex?\vec{F}_{ssNMR}=-\frac{dV_{ssNMR}}{dObs^{Calc}}\frac{dObs^{Calc}}{d\vec{r}})
 
