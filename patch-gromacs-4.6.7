@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]
+then
+echo "\nERROR (Argument missing) \nUsage: ./patch-gromacs-4.6.7 [ gromacs-4.6.7_source_dir ]\n\n"
+exit 1
+fi
+
+GROMACS_SRC=$1
+
+patch --dry-run -b -ruN -p1 -d $GROMACS_SRC < modelSSNMR-4.6.7.patch > /dev/null
+
+if [ $? -eq 1 ]
+then
+echo "\nERROR (Patching unsuccessful) \nPlease check you specified the correct source directory and version of GROMACS (4.6.7)\n\n"
+exit 1
+fi
+
+patch -ruN -p1 -b -d $GROMACS_SRC < modelSSNMR-4.6.7.patch
