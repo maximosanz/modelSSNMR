@@ -14,6 +14,8 @@ If using or referencing this methodology, please cite:
 
 *Sanz-Hernández, M. et al. Accurate Determination of Conformational Transitions in Oligomeric Membrane Proteins. Sci. Rep. 6, 23063;* doi: [10.1038/srep23063](https://www.doi.org/10.1038/srep23063) (2016)
 
+*De Simone, A. et al. Structural Dynamics and Conformational Equilibria of SERCA Regulatory Proteins in Membranes by Solid-State NMR Restrained Simulations. Biophys. J. 106(12): 2566–76;* doi: [10.1016/j.bpj.2014.03.026](https://www.doi.org/10.1016/j.bpj.2014.03.026) (2014)
+
 ## ssNMR models and theory
 
 The ssNMR data used here to restrain MD simulations are [chemical shift anisotropy](http://triton.iqfr.csic.es/guide/eNMR/proteins/CSA.html) (CSA) and [dipolar couplings](https://en.wikipedia.org/wiki/Magnetic_dipole%E2%80%93dipole_interaction) (DC). These data provide very powerful topological information regarding the orientation of chemical groups in proteins, and are particularly useful in the context of membrane proteins.
@@ -141,10 +143,17 @@ The error tolerance can optionally be modified, as well as the magnitude of the 
 Example of experimental data for a set of <sup>15</sup>N CSA 
 
 ```
+# CSA data without specified errors (default error of 5.0)
+0 121 122 119 78.000
+0 67 68 65 71.000
+
+# CSA data with custom errors (optional)
 0 67 68 65 71.000 7.5
 0 100 101 98 79.000 7.5
-0 121 122 119 78.000
-0 140 141 138 79.000 5.0 46.5 66.3 211.6 0 154 155 152 77.000
+
+# CSA data with errors and modified tensor magnitudes (optional, e.g. for Glycine)
+0 140 141 138 79.000 5.0 46.5 66.3 211.6
+0 154 155 152 77.000 7.5 46.5 66.3 211.6
 ```
 
 In the case of DC (identifier 1), for a given peptide plane of the residue *i* 
@@ -155,12 +164,17 @@ Example of experimental data for a set of <sup>15</sup>N-<sup>1</sup>H DC:
 
 
 ```
+# DC data without specified errors (default error of 0.5)
 1 67 68 4.900
 1 121 122 4.600
-1 140 141 5.100
-1 154 155 3.500
-1 178 179 3.500
-1 189 190 5.100 1.0 1 218 219 3.500 1.0
+
+# DC data with specified errors (optional)
+1 140 141 5.100 1.0
+1 154 155 3.500 1.0
+
+# DC data with specified errors and kDC constant (optional, e.g. for 13Cα-1Hα)
+1 178 179 3.500 0.5 -22.68
+1 189 190 5.100 1.0 -22.68
 ```
 
 In the case of distances (identifier 2), for any two given atoms of interest:
@@ -172,7 +186,7 @@ Example of experimental data for a set of distances (expressed in nm)
 
 ```
 1 62 210 0.49
-1 401 152 1.50 0.25
+1 401 152 1.50
 1 140 101 0.49
 ```
 
